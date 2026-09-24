@@ -21,6 +21,12 @@ public class Usuario {
 
     private Integer puntos = 0;
 
+    @Column(name = "codigo_verificacion")
+    private String codigoVerificacion;
+
+    @Column(name = "estado_cuenta")
+    private Boolean estadoCuenta = false;
+
     public Usuario() {}
 
     public Usuario(Long id, String nombre, String email, String password, Integer puntos) {
@@ -31,6 +37,7 @@ public class Usuario {
         this.puntos = puntos;
     }
 
+    // Getters y Setters anteriores
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getNombre() { return nombre; }
@@ -41,4 +48,10 @@ public class Usuario {
     public void setPassword(String password) { this.password = password; }
     public Integer getPuntos() { return puntos; }
     public void setPuntos(Integer puntos) { this.puntos = puntos; }
+
+    // --- GETTERS Y SETTERS DE LOS NUEVOS CAMPOS ---
+    public String getCodigoVerificacion() { return codigoVerificacion; }
+    public void setCodigoVerificacion(String codigoVerificacion) { this.codigoVerificacion = codigoVerificacion; }
+    public Boolean getEstadoCuenta() { return estadoCuenta; }
+    public void setEstadoCuenta(Boolean estadoCuenta) { this.estadoCuenta = estadoCuenta; }
 }
