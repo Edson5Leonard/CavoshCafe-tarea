@@ -21,15 +21,15 @@ public class Pedido {
     private Sede sede;
 
     @Column(name = "metodo_entrega", nullable = false)
-    private String metodoEntrega; // RECOJO o DELIVERY
+    private String metodoEntrega; 
 
     @Column(name = "metodo_pago", nullable = false)
-    private String metodoPago; // TARJETA, EFECTIVO, PAYPAL
+    private String metodoPago; 
 
     @Column(name = "fecha_programada")
     private LocalDateTime fechaProgramada;
 
-    private String estado = "CREADO"; // CREADO, PREPARANDO, LISTO, COMPLETADO
+    private String estado = "CREADO"; 
 
     @Column(nullable = false)
     private BigDecimal subtotal;

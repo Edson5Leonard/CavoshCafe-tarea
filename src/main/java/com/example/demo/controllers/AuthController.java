@@ -39,7 +39,7 @@ public class AuthController {
 
         Usuario nuevoUsuario = usuarioRepository.save(usuario);
 
-        // 4. Enviar el correo electrónico con el código generado
+
         emailService.enviarCodigoVerificacion(usuario.getEmail(), codigo);
 
         return ResponseEntity.status(HttpStatus.CREATED)

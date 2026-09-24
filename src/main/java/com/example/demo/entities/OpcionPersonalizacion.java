@@ -12,7 +12,7 @@ public class OpcionPersonalizacion {
     private Long id;
 
     @Column(name = "tipo_opcion", nullable = false)
-    private String tipoOpcion; // TAMANO, LECHE, CREMA, CAFEINA
+    private String tipoOpcion; 
 
     @Column(nullable = false)
     private String nombre;
