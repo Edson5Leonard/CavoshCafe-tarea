@@ -25,26 +25,29 @@ public class AuthController {
     private EmailService emailService; 
 
     @PostMapping("/registro")
-    public ResponseEntity<ApiResponse<UsuarioDTO>> registrar(@RequestBody Usuario usuario) {
-        if (usuarioRepository.existsByEmail(usuario.getEmail())) {
-            return ResponseEntity.badRequest()
-                    .body(ApiResponse.error(400, "Error al registrar", "El correo ya existe en el sistema"));
-        }
-
-     
-        String codigo = String.format("%06d", new Random().nextInt(999999));
-        
-        usuario.setCodigoVerificacion(codigo);
-        usuario.setEstadoCuenta(false); // Inactivo hasta que ingrese el código
-
-        Usuario nuevoUsuario = usuarioRepository.save(usuario);
-
-
-        emailService.enviarCodigoVerificacion(usuario.getEmail(), codigo);
-
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ApiResponse.created("Usuario registrado exitosamente. Se envió un código a tu correo.", new UsuarioDTO(nuevoUsuario)));
+public ResponseEntity<ApiResponse<UsuarioDTO>> registrar(@RequestBody Usuario usuario) {
+    if (usuarioRepository.existsByEmail(usuario.getEmail())) {
+        return ResponseEntity.badRequest()
+                .body(ApiResponse.error(400, "Error al registrar", "El correo ya existe en el sistema"));
     }
+
+    String codigo = String.format("%06d", new Random().nextInt(999999));
+    
+    usuario.setCodigoVerificacion(codigo);
+    usuario.setEstadoCuenta(false); 
+
+    Usuario nuevoUsuario = usuarioRepository.save(usuario);
+
+    
+    try {
+        emailService.enviarCodigoVerificacion(usuario.getEmail(), codigo);
+    } catch (Exception e) {
+        System.err.println("Error al enviar correo de verificación: " + e.getMessage());
+    }
+
+    return ResponseEntity.status(HttpStatus.CREATED)
+            .body(ApiResponse.created("Usuario registrado exitosamente. Se envió un código a tu correo.", new UsuarioDTO(nuevoUsuario)));
+}
 
     @PostMapping("/validar-codigo")
     public ResponseEntity<ApiResponse<String>> validarCodigo(@RequestBody VerificacionDTO req) {
