@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dto.ApiResponse;
-import com.example.demo.dto.CategoriaDTO; // Importa tu DTO
+import com.example.demo.dto.CategoriaDTO; 
 import com.example.demo.services.CategoriaService; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
