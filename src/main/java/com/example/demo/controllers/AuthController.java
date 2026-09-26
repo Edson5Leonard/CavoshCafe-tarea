@@ -36,13 +36,14 @@ public ResponseEntity<ApiResponse<UsuarioDTO>> registrar(@RequestBody Usuario us
     usuario.setCodigoVerificacion(codigo);
     usuario.setEstadoCuenta(false); 
 
+    
     Usuario nuevoUsuario = usuarioRepository.save(usuario);
 
     
     try {
         emailService.enviarCodigoVerificacion(usuario.getEmail(), codigo);
     } catch (Exception e) {
-        System.err.println("Error al enviar correo de verificación: " + e.getMessage());
+        System.err.println("No se pudo enviar el correo: " + e.getMessage());
     }
 
     return ResponseEntity.status(HttpStatus.CREATED)
