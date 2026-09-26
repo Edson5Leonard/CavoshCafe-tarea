@@ -1,21 +1,12 @@
-package com.example.demo.entities;
+package com.example.demo.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "categorias")
-public class Categoria {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CategoriaDTO {
     private Long id;
-
-    @Column(nullable = false, unique = true)
     private String nombre;
 
-    public Categoria() {}
+    public CategoriaDTO() {}
 
-    public Categoria(Long id, String nombre) {
+    public CategoriaDTO(Long id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
